@@ -915,7 +915,6 @@
             ) D ON F.IDX = D.FESTIVAL_IDX
 	        WHERE
 	        	F.STATE = 2 
-	        	AND F.FUNDING_END BETWEEN SYSDATE AND SYSDATE + 7
 	        ORDER BY F.FUNDING_END
 		) BOARD
 	) WHERE RN BETWEEN #{startRow} and #{endRow}
@@ -958,9 +957,7 @@
           	GROUP BY FESTIVAL_IDX
         ) D ON F.IDX = D.FESTIVAL_IDX
      	WHERE 
-     		F.STATE = 2 
-        	AND F.FUNDING_END BETWEEN SYSDATE AND SYSDATE + 7
-   	)
+     		F.STATE = 2)
 	</select>
    
    <!-- 현재 상영 중인 영화제 중 INDEX_SHOW2 = 1(기대평 많은 순)인 영화제 검색 3개 검색 -->
@@ -1043,8 +1040,7 @@
 				F.OPTION3,
 				F.OPTION4,
 				F.INDEX_SHOW2,
-				E.AVGSTAR,
-				ROUND(COLLECTED/TARGET*100, 2) AS PERCENTAGE
+				E.AVGSTAR
 			FROM FESTIVAL F LEFT JOIN (
 				SELECT
 					FESTIVAL_IDX,
@@ -1082,8 +1078,7 @@
 			F.OPTION3,
 			F.OPTION4,
 			F.INDEX_SHOW2,
-			E.AVGSTAR,
-			ROUND(COLLECTED/TARGET*100, 2) AS PERCENTAGE
+			E.AVGSTAR
 		FROM FESTIVAL F LEFT JOIN (
 			SELECT
 				FESTIVAL_IDX,
