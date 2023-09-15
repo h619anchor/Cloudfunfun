@@ -23,7 +23,12 @@
                         <div class="carousel-caption">
                             <div class="row">
                                 <div class="col-md-12 slider-content">
-                                    <h3 class="slide-title fadeInDown animated first"><span class="text-primary">${indexMainFestival[0].subject }</span></h3>
+                                    <h3 class="slide-title fadeInDown animated first">
+                                   	<span class="label label-pill label-default-filled">마감 ${indexMainFestival[0].deadline }일 전</span>
+                                    </h3>
+                                    <h3 class="slide-title fadeInDown animated first">
+                                    	<span class="text-primary">${indexMainFestival[0].subject }</span>
+                                    </h3>
                                     <p class="slide-text flipInX animated second" style="color: white">펀딩 기간 : ${indexMainFestival[0].fundingStart } ~ ${indexMainFestival[0].fundingEnd }</p>
                                     <a href="${pageContext.request.contextPath}/donation/single-festival?idx=${indexMainFestival[0].idx}" class="page-scroll btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><span class="lnr lnr-pointer-right"></span><span>지금 후원하러 가기</span></a>
                                 </div><!-- slider-content -->
@@ -38,7 +43,12 @@
                         <div class="carousel-caption">
                             <div class="row">
                                 <div class="col-md-12 slider-content">
-                                    <h3 class="slide-title fadeInDown animated first"><span class="text-primary">${indexMainFestival[1].subject }</span></h3>
+                                    <h3 class="slide-title fadeInDown animated first">
+                                   	<span class="label label-pill label-default-filled">마감 ${indexMainFestival[1].deadline }일 전</span>
+                                   	</h3>
+                                    <h3 class="slide-title fadeInDown animated first">
+                                    	<span class="text-primary">${indexMainFestival[1].subject }</span>
+                                   	</h3>
                                     <p class="slide-text flipInX animated second" style="color: white">펀딩 기간 : ${indexMainFestival[1].fundingStart } ~ ${indexMainFestival[1].fundingEnd }</p>
                                     <a href="${pageContext.request.contextPath}/donation/single-festival?idx=${indexMainFestival[1].idx}" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>지금 후원하러 가기</span></a>
                                 </div><!-- slider-content -->
@@ -53,7 +63,12 @@
                         <div class="carousel-caption">
                             <div class="row">
                                 <div class="col-md-12 slider-content">
-                                    <h3 class="slide-title fadeInDown animated first"><span class="text-primary">${indexMainFestival[2].subject }</span></h3>
+                                    <h3 class="slide-title fadeInDown animated first">
+                                   	<span class="label label-pill label-default-filled">마감 ${indexMainFestival[2].deadline }일 전</span>
+                                    </h3>
+                                    <h3 class="slide-title fadeInDown animated first">
+                                    	<span class="text-primary">${indexMainFestival[2].subject }</span>
+                                    </h3>
                                     <p class="slide-text flipInX animated second" style="color: white">펀딩 기간 : ${indexMainFestival[2].fundingStart } ~ ${indexMainFestival[2].fundingEnd }</p>
                                     <a href="${pageContext.request.contextPath}/donation/single-festival?idx=${indexMainFestival[2].idx}" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>지금 후원하러 가기</span></a>
                                 </div><!-- slider-content -->

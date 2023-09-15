@@ -21,7 +21,6 @@ import xyz.itwill.service.FestivalService;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class IndexController {
 	private final FestivalService festivalService;
 	private final ExpectService expectService;
