@@ -100,12 +100,12 @@
 		            PHONE,
 		            EMAIL,
 		            GENDER,
-		            BIRTH,
+		            TO_CHAR(BIRTH,'yyyy-mm-dd') AS BIRTH,
 		            ADDRESS1,
 		            ADDRESS2,
 		            ADDRESS3,
 		            STATUS,
-		            SUB_DAY
+		            TO_CHAR(SUB_DAY,'yyyy-mm-dd') AS SUB_DAY
 		        FROM ACCOUNT 
        		 WHERE
         <choose>

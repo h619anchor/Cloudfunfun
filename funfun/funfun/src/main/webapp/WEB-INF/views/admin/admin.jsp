@@ -188,13 +188,13 @@ function festivalListDisplay(pageNum, pageSize, selectKeyword) {
        	           
        	           var aFestivalDetail = $("<a>").attr('href', 'javascript:festivalDetail(' + festival.idx + ');').addClass('product-link');
        	           
-       	           var imgThumbnail = $("<img>").attr("src", '<c:url value="/resources/upload/' + festival.mainImg + '" />').attr("alt", festival.subject + " 포스터");
+       	           var imgThumbnail = $("<img>").attr("src", '<c:url value="/resources/upload/' + festival.mainImg + '" />').attr("alt", festival.subject + " 포스터").addClass('card-img-top').attr('style','height: 300px !important');
        	           
-       	           var shopTitleDiv = $("<div>").addClass("shop_title");
+       	           var shopTitleDiv = $("<div>").addClass("shop_title card-body");
        	           
        	           
-       	           var strongTitle = $("<h3>").addClass("product-title").text(festival.subject);
-       	           var percentComplete = $("<h6>").addClass("product-price").text("달성률 %");
+       	           var strongTitle = $("<h3>").addClass("product-title card-title").text(festival.subject);
+       	           var percentComplete = $("<h6>").addClass("product-price").text("달성률 "+ festival.percentage +"%");
        	           
        	           // 요소들을 조립합니다.
        	           shopTitleDiv.append(strongTitle, percentComplete);
@@ -243,17 +243,35 @@ function festivalListDisplay(pageNum, pageSize, selectKeyword) {
                         row += "<td style='background-color: green;'>" + festival.idx + "</td>";
                     } else if (festival.state == 3) {
                         row += "<td style='background-color: #D3D3D3;'>" + festival.idx + "</td>";
+                    } else if (festival.state == 4) {
+                        row += "<td style='background-color: #D3D3D3;'>" + festival.idx + "</td>";
                     } else {
-                        row += "<td style='background-color: red;'>" + festival.idx + "</td>";
+                        row += "<td style='background-color: gray;'>" + festival.idx + "</td>";
                     }
+                    
                     row += "<td>" + festival.subject + "</td>" +
                        	   "<td>" + festival.startDay + "</td>" +
                            "<td>" + festival.endDay + "</td>" +
-                           "<td>" + festival.fundingstart + "</td>" +
-                           "<td>" + festival.fundingEnd + "</td>" +
-                           "<td>" + festival.state + "</td>" +
-                           "<td>" + festival.collected + "</td>" +
-                           "<td>" + festival.sponsor + "</td>" +
+                           "<td>" + festival.fundingStart + "</td>" +
+                           "<td>" + festival.fundingEnd + "</td>";
+                           
+                    if (festival.state == 0) {
+                        row += "<td>승인 전</td>";
+                    } else if (festival.state == 1) {
+                        row += "<td style='background-color: #87CEEB;'>후원 예정</td>";
+                    } else if (festival.state == 2) {
+                        row += "<td style='background-color: green;'>후원 중</td>";
+                    } else if (festival.state == 3) {
+                        row += "<td style='background-color: #D3D3D3;'>후원 종료</td>";
+                    } else if (festival.state == 3){
+                        row += "<td style='background-color: red;'>후원 거부</td>";
+                    } else {
+                        row += "<td style='background-color: gray;'>삭제</td>";
+                    }
+                           
+                    row += "<td>" + festival.percentage + "%</td>" +
+                           "<td>" + festival.collected + "원</td>" +
+                           "<td>" + festival.sponsor + "명</td>" +
                            "</tr>";
                    tbody.append(row);
                }
@@ -420,12 +438,13 @@ function noticeListDisplay(pageNum, pageSize, selectKeyword) {
             } 
             for (var i = 0; i < result.noticeList.length; i++) {
                 var notice = result.noticeList[i];
+            	var noticeFile = notice.fileData !== null ? notice.fileData : "";
                 var row = "<tr data-idx='" + notice.idx + "'>" +
                     "<td>" + notice.idx + "</td>" +
                     "<td>" + notice.title + "</td>" +
                     "<td>" + notice.content + "</td>" +
                     "<td>" + notice.day + "</td>" +
-                    "<td>" + notice.fileData + "</td>" +
+                    "<td>" + noticeFile + "</td>" +
                     "<td>" + notice.count+ "</td>" +
                     "</tr>";
                 tbody.append(row);

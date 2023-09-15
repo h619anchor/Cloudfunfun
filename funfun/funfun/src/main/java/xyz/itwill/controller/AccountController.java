@@ -136,4 +136,9 @@ public class AccountController {
      public void findPwPost(@ModelAttribute Account account) throws Exception {
         accountService.findPassword(account);
      }
+     
+     @RequestMapping(value = "/my_festival", method = RequestMethod.GET)
+     public String showMyFestival() {
+        return "account/my_festival";
+     }
 }

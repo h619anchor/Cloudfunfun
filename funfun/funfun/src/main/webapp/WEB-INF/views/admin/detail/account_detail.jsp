@@ -398,7 +398,7 @@ $(document).ready(function() {
         if (confirm("정말로 삭제하시겠습니까?")) {
 
             $.ajax({
-                type: "DELETE",
+                type: "PUT",
                 url: "<c:url value='/admin/account_remove?id='/>" + id,
                 success: function(result) {
                     if (result == "success") {

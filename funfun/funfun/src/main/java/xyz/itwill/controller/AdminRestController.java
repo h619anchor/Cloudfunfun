@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -215,35 +216,65 @@ public class AdminRestController {
 	}
 
 	@PostMapping("/notice_add")
-	public String addNotice(HttpServletRequest request, HttpSession httpSession)
+	public String addNotice(@RequestBody Notice notice, @RequestParam("uploadFile") MultipartFile uploadFile, HttpServletRequest request)
 			throws IllegalStateException, IOException {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		Notice notice = new Notice();
-		MultipartFile multipartFile = ((MultipartHttpServletRequest) request).getFile("uploadFile");
 
-		// 파일을 업로드하려면 multipartFile 변수를 확인합니다.
-		if (multipartFile != null && !multipartFile.isEmpty()) {
-			String uploadDirectory = context.getServletContext().getRealPath("/resources/upload");
-			String uploadFile = UUID.randomUUID().toString() + "_" + multipartFile.getOriginalFilename();
+		// 파일을 업로드하려면 uploadFile 변수를 확인합니다.
+        if (uploadFile != null && !uploadFile.isEmpty()) {
+            try {
+                String uploadDirectory = request.getServletContext().getRealPath("/resources/upload"); // 업로드할 디렉토리 경로
+                String originalFilename = uploadFile.getOriginalFilename();
+                String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
+                String filePath = uploadDirectory + File.separator + uniqueFilename;
 
-			notice.setFileData(uploadFile);
-			multipartFile.transferTo(new File(uploadDirectory, uploadFile));
-			// 파일 업로드 로직을 수행합니다.
-		}
+                // 파일 저장
+                File destFile = new File(filePath);
+                uploadFile.transferTo(destFile);
+
+                notice.setFileData(uniqueFilename);
+            } catch (IOException e) {
+                // 파일 업로드 중 오류 처리
+                e.printStackTrace();
+            }
+        }
+        
 		notice.setTitle(title);
 		notice.setContent(content);
 		noticeService.addNotice(notice);
-		httpSession.setAttribute("idx", notice.getIdx());
 
 		// 나머지 공지사항 등록 로직을 수행합니다.
 		return "success";
 	}
 
-	@PutMapping("/notice_modify")
-	public String modifyNotice(@RequestBody Notice notice, HttpSession httpSession) {
-		notice.setTitle(HtmlUtils.htmlEscape(notice.getTitle()));
-		notice.setContent(HtmlUtils.htmlEscape(notice.getContent()));
+	@PostMapping("/notice_modify")
+	public String modifyNotice(@ModelAttribute Notice notice, @RequestParam("uploadFile") MultipartFile uploadFile,
+            @RequestParam("fileDeleted") boolean fileDeleted,
+            HttpServletRequest request) throws IllegalStateException, IOException {
+		// 기존 공지사항 정보를 가져옵니다.
+		Notice existingNotice = noticeService.getNotice(notice.getIdx());
+		
+		// 이미지 파일이 업로드되지 않았을 때 기존 이미지를 유지합니다.
+	       if (fileDeleted) {
+	           notice.setFileData(null); // 파일을 삭제하므로 null로 설정
+	       } else {
+	    	   if(!uploadFile.isEmpty()) {
+	    	   String uploadDirectory = request.getServletContext().getRealPath("/resources/upload"); // 업로드할 디렉토리 경로
+	               String originalFilename = uploadFile.getOriginalFilename();
+	               String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
+	               //String filePath = uploadDirectory + File.separator + uniqueFilename;
+
+	               // 새로 업로드한 파일로 설정
+	               notice.setFileData(uniqueFilename);
+	               // 파일 저장
+	               uploadFile.transferTo(new File(uploadDirectory, uniqueFilename));
+
+	    	   		} else {
+	    	   			// 이미지 파일이 업로드되지 않았을 때 기존 파일 정보를 그대로 사용
+	    	   			notice.setFileData(existingNotice.getFileData());
+	    	   		}
+	       		}
 
 		noticeService.modifyNotice(notice);
 

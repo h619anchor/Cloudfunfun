@@ -38,12 +38,12 @@ public class Account {
 	private String phone;
 	private String email;
 	private int gender;
-	private Date birth;
+	private String birth;
 	private String address1;
 	private String address2;
 	private String address3;
 	private int status;
-	private Timestamp subDay;
+	private String subDay;
 
 	// 비밀번호 변경을 위한 필드 추가
 	@NotEmpty(message = "현재 비밀번호를 반드시 입력해주세요.")
