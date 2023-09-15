@@ -56,12 +56,6 @@ public class AccountDAOImpl implements AccountDAO {
 		return sqlSession.getMapper(AccountMapper.class).updateAccountByAdmin(account);
 	}
 
-	// 비밀번호 찾기
-	@Override
-	public Account pwSearch(Account search) {
-		return sqlSession.getMapper(AccountMapper.class).pwSearch(search);
-	}
-
 	// 새 비밀번호 업데이트
 	@Override
 	public int updatePassword(Account account) {

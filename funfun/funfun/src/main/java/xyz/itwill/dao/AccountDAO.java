@@ -23,9 +23,6 @@ public interface AccountDAO {
 	// 아이디 찾기
 	Account idSearch(Account search);
 
-	// 비밀번호 찾기
-	Account pwSearch(Account search);
-
 	// 새 비밀번호 업데이트
 	int updatePassword(Account account);
 

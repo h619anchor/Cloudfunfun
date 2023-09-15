@@ -54,7 +54,8 @@ public class AccountController {
    
    //로그인 시 아이디랑 비밀번호가 서버에 등록되어있는지 확인하는 메소드
    @PostMapping("/login")
-   public ResponseEntity<String> login(@RequestBody Account account,Model model,@RequestParam(value = "autoLogin", required = false) boolean autoLogin,
+   public ResponseEntity<String> login(@RequestBody Account account,
+         @RequestParam(value = "autoLogin", required = false) boolean autoLogin,
          HttpSession session) {
       try {
          Account authAccount = accountService.loginAuth(account);
@@ -77,7 +78,7 @@ public class AccountController {
    
    //로그아웃 처리 메소드
    @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
-   public String logout(HttpServletRequest request){ //, @RequestParam(value = "POST", required = false)String postParam) {
+   public String logout(HttpServletRequest request){ 
       HttpSession session = request.getSession(false);
       
       if(session != null) {
@@ -129,20 +130,10 @@ public class AccountController {
     @RequestMapping(value = "/find-password", method = RequestMethod.GET)
      public void findPwGET() throws Exception {
      }
-     
-     /*@RequestMapping(value = "find-password", method = RequestMethod.POST)
-     public void findPwPost(@ModelAttribute Account account, HttpServletResponse response) throws Exception {
-        accountService.findPassword(response, account);
-     }*/
+ 
     
      @RequestMapping(value = "find-password", method = RequestMethod.POST)
      public void findPwPost(@ModelAttribute Account account) throws Exception {
         accountService.findPassword(account);
      }
-     
-     @RequestMapping(value = "/my_festival", method = RequestMethod.GET)
-     public String showMyFestival() {
-        return "account/my_festival";
-     }
-     
 }
