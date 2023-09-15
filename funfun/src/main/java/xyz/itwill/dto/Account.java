@@ -1,7 +1,6 @@
 package xyz.itwill.dto;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -38,12 +37,12 @@ public class Account {
 	private String phone;
 	private String email;
 	private int gender;
-	private Date birth;
+	private String birth;
 	private String address1;
 	private String address2;
 	private String address3;
 	private int status;
-	private Timestamp subDay;
+	private String subDay;
 
 	// 비밀번호 변경을 위한 필드 추가
 	@NotEmpty(message = "현재 비밀번호를 반드시 입력해주세요.")
@@ -58,4 +57,7 @@ public class Account {
 
 	@NotEmpty(message = "새 비밀번호 확인을 반드시 입력해주세요.")
 	private String confirmPassword;
+	
+	private String enabled;
+	private List<AccountAuth> accountAuthList;
 }

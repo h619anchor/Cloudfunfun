@@ -64,14 +64,22 @@
 }
 .noinBtn {
    width: 150px;
-   margin-left: 370px;
    margin-bottom: 50px;
    display: block;
 }
-.pageNumDiv {
-	margin-left: 500px;
+#pageNumDiv {
+    text-align: center;
+   	margin-bottom: 50px;
+   	margin-left: 100px;
 }
-
+.button-and-page-num {
+    display: flex; /* Flexbox를 사용하여 내부 요소를 가로로 나열 */
+    justify-content: center;
+    align-items: center; /* 수직 가운데 정렬 */
+}
+#pageSizeSelect {
+    margin-top: 10px;
+}
 </style>
 </head>
 
@@ -119,17 +127,18 @@
             <!-- 게시글 목록을 출력하는 태그 -->
                 <div id="infoListDiv"></div>
 
-		<!-- 공지사항 등록 버튼 -->
-      	<c:if test="${loginAccount != null and loginAccount.status == 0}">
-      	<p>
-	       <a href="/funfun/community/notice/form">
-	           <button type="button" id="right-button" 
-	           class="noinBtn - btn btn-md btn-primary-filled btn-form-submit btn-rounded" >공지사항 등록</button>
-	       </a>
-	      </p>
-	      </c:if>
-                <!-- 페이지 번호를 출력하는 태그 -->
-                <div id="pageNumDiv"></div>
+			    <!-- 공지사항 등록 버튼 -->
+			<div class="button-and-page-num">
+			    <c:if test="${loginAccount != null and loginAccount.status == 0}">
+			        <button type="button" id="right-button" 
+			        class="noinBtn - btn btn-md btn-primary-filled btn-form-submit btn-rounded"
+			        onclick="window.location.href='/funfun/community/notice/form';">공지사항 등록</button>
+			    </c:if>
+			    
+			    <!-- 페이지 번호를 출력하는 태그 -->
+			    <div id="pageNumDiv"></div>
+			</div>
+
                 
    
 
@@ -209,7 +218,7 @@ function noticeListDisplay(pageNum, pageSize, selectKeyword) {
             searchDiv.empty();
 
          searchDiv.append(
-             "<button id='searchButton' class='btn btn-md btn-primary-filled btn-form-submit btn-rounded' style='float:right; margin-right:150px;'>검색</button>"+
+             "<button id='searchButton' class='btn btn-md btn-primary-filled btn-form-submit btn-rounded' style='float:right; margin-right:150px; height:48px;'>검색</button>"+
             "<input type='text' class='form-control' id='selectKeyword' placeholder='검색어를 입력하세요' style='width:250px; height:4px; float:right; margin-right:10px;'>"
             )
           

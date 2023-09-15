@@ -26,9 +26,11 @@ public interface AccountService {
 	Account idSearch(Account account);
 
 	// 비밀번호 찾기
-	// void findPassword(HttpServletResponse response,Account account)throws Exception;
 	String findPassword(Account account) throws Exception;
 
 	// 새 비밀번호 업데이트
 	void modifyPassword(Account account);
+
+	// 아이디 중복 체크
+	boolean isIdExists(Account account);
 }

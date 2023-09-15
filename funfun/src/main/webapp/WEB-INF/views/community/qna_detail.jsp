@@ -40,20 +40,20 @@ img {
 <body>
 
 <!-- 사이드바 -->
-   <div class="col-sm-4 col-md-3 sidebar-area">
-      <div class="categories-sidebar-widget widget no-border">
-         <h5 class="widget-title">커뮤니티</h5>
-         <p class="product-category">
-            <a href="${pageContext.request.contextPath}/community/notice">공지사항</a> <span class="pull-right"></span>
-         </p>
-         <p class="product-category">
-            <a href="${pageContext.request.contextPath}/community/faq">FAQ</a> <span class="pull-right"></span>
-         </p>
-         <p class="product-category">
+<div class="col-sm-4 col-md-3 sidebar-area">
+	<div class="categories-sidebar-widget widget no-border">
+		<h5 class="widget-title">커뮤니티</h5>
+		<p class="product-category">
+        	<a href="${pageContext.request.contextPath}/community/notice">공지사항</a> <span class="pull-right"></span>
+     	</p>
+     	<p class="product-category">
+        	<a href="${pageContext.request.contextPath}/community/faq">FAQ</a> <span class="pull-right"></span>
+     	</p>
+        <p class="product-category">
             <a href="${pageContext.request.contextPath}/community/qna_list">Q&amp;A</a> <span class="pull-right"></span>
-         </p>
-      </div>
-   </div>
+        </p>
+	</div>
+</div>
 <!-- 사이드바 -->
 
 <div class="container">
@@ -68,8 +68,8 @@ img {
                             <h4 class="media-heading">${question.title}</h4>
                             <hr>
                             <p class="right-align">
-							  <span>작성자 : ${question.accountId}</span>
-							  <span style="margin-left: 10px;">&nbsp; ${question.day}</span>
+								<span>작성자 : ${question.accountId}</span>
+								<span style="margin-left: 10px;">&nbsp; ${question.day}</span>
 							</p>
                             <hr>
                             <p>${question.content}</p>
@@ -83,34 +83,33 @@ img {
                     </div><!-- / media -->
 
 
-							<!-- 수정 폼을 감싸는 div -->
-                            <div id="edit-form" style="display: none;">
-                            <label>수정하기</label>
-                            <br><br>
-                                 <div class="form-group">
-                            <label for="title">제목</label>
-                            <textarea id="title" name="title" class="form-control">${question.title}</textarea>
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <label for="nContent">내용</label>
-                            <textarea id="nContent" name="content" class="form-control">${question.content}</textarea>
-                        </div>
-                        <div class="form_group">
-						    <label>파일 첨부</label>
-						    <input type="file" id="uploadFile" name="uploadFile">
-						     <c:if test="${not empty question.fileData}">
-							    <img src="<c:url value='/resources/upload/${question.fileData}' />" id="fileimg" style="display: block;">
-								<button id="deleteFileBtn">파일 삭제</button>
-							</c:if>
-						</div>
+					<!-- 수정 폼을 감싸는 div -->
+                    <div id="edit-form" style="display: none;">
+                    <label>수정하기</label>
+                    <br><br>
+                    <div class="form-group">
+                    	<label for="title">제목</label>
+                    	<textarea id="title" name="title" class="form-control">${question.title}</textarea>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                    	<label for="nContent">내용</label>
+                    	<textarea id="nContent" name="content" class="form-control">${question.content}</textarea>
+                    </div>
+                    <div class="form_group">
+						<label>파일 첨부</label>
+						<input type="file" id="uploadFile" name="uploadFile">
+					 	<c:if test="${not empty question.fileData}">
+						    <img src="<c:url value='/resources/upload/${question.fileData}' />" id="fileimg" style="display: block;">
+							<button id="deleteFileBtn">파일 삭제</button>
+						</c:if>
+					</div>
 						<input type="hidden" name="idx" value="${question.idx}">
-                        <hr>
-
-                              <!-- 수정 버튼 -->
-                                 <button id="modifyBtn" type="submit">저장</button>
-                                 <button id="cancelModifyBtn" type="button">취소</button>
-                            </div>
+                    <hr>
+                      <!-- 수정 버튼 -->
+                        <button id="modifyBtn" type="submit">저장</button>
+                        <button id="cancelModifyBtn" type="button">취소</button>
+                    </div>
 
                     <div class="post-footer">
                         <div class="pull-left">
@@ -128,15 +127,15 @@ img {
                <!-- post pagination -->
                 <div class="pagination"><!-- 이전글이 없는 경우 이전글 버튼 생략 -->
                    <c:choose>
-                      <c:when test="${preNextIdx.prevnum != 0}">
+                   		<c:when test="${preNextIdx.prevnum != 0}">
                           <a href="<c:url value='/community/qna_detail'/>?idx=${preNextIdx.prevnum}" class="btn btn-direction btn-default btn-rounded" id="prevButton"><i class="fa fa-long-arrow-left"></i><span>이전글</span></a>
-                      </c:when>
-                      <c:otherwise>
-                         <div class="space"></div>
-                      </c:otherwise>
-                     </c:choose>
+                        </c:when>
+						<c:otherwise>
+                        	<div class="space"></div>
+                    	</c:otherwise>
+                    </c:choose>
                      <div class="space"></div>
-                    <button type="button" class="btn btn-direction btn-default btn-rounded" id="list_btn"><i class="fa fa-long-arrow-center"></i><span>목록</span></button>
+                     	<button type="button" class="btn btn-direction btn-default btn-rounded" id="list_btn"><i class="fa fa-long-arrow-center"></i><span>목록</span></button>
                      <div class="space"></div>
                     <c:choose>
                        <c:when test="${preNextIdx.nextnum != 0}">
@@ -144,25 +143,34 @@ img {
                         </c:when>
                     </c:choose>
                 </div><!-- / post pagination -->
-            <hr>
-
+				<br>
+				
                 <div class="comments">
-                    <h4>답변</h4>
+                	<div class="comment-title">
+                		<c:if test="${question.answerContent != null }">
+		                    <h4>답변</h4>
+		                    <hr>
+                   	 	</c:if>
+                    </div>
+                    
                     <ul class="media-list">
                         <li class="media">
                             <div class="media-body">
                                 <div class="comment-info">
-                                    <div class="comment-date">${question.answerDay}</div>
-                                    <div class="comment-author">Admin</div>
-                                    <br>
+                                	<c:if test="${question.answerContent != null }">
+	                                    <div class="comment-date">Admin &nbsp; ${question.answerDay}</div>
+	                                    <hr>
+                                	</c:if>
                                 </div><!-- / comment-info -->
-                                	<br>
-                                	<br>
+                                
                                 <div id="adminComment" class="comment">
-                                	<p>${question.answerContent}</p>
+                                	<c:if test="${question.answerContent != null }">
+	                                	<p>${question.answerContent}</p>
+	                                	<hr>
+                                	</c:if>
                                 </div><!-- / comment -->	
-                                	<br>
-                                	<br>
+                                <br>
+                                
                                 <div class="comment">
                                 	<c:if test="${loginAccount.status == 0 and question.answerContent != null }">
 	                                    <a id="modify-answer" href="javascript:void(0)" class="btn btn-xs btn-primary-filled btn-rounded">수정하기</a>
@@ -180,7 +188,6 @@ img {
 	                        <form id="commentForm" data-toggle="validator">
 	                            <h4 class="space-left">답변 작성</h4>
 	                            <div class="row">
-	                               
 	                                <div class="col-sm-12">
 	                                    <div class="form-group">
 	                                        <textarea id="ansmessage" class="form-control" rows="5" placeholder="답변을 입력해주세요." required></textarea>
@@ -245,7 +252,7 @@ $(document).ready(function() {
 	    	fileDeleted = true;
 	    });
 	    
-	    //수정 버튼 클릭 시
+	 //수정 버튼 클릭 시
 	    $("#modifyBtn").click(function() {
 	       var title=$("#title").val();
 	       var content=$("#nContent").val();

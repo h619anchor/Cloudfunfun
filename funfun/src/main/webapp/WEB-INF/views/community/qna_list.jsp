@@ -73,6 +73,22 @@
 .secret-text {
     font-weight: bold;
 }
+.noinBtn {
+   width: 150px;
+   margin-bottom: 50px;
+   display: block;
+}
+#pageNumDiv {
+    text-align: center; 
+   	margin-bottom: 50px;
+   	margin-left: 10px;
+   	margin-right: 500px;
+}
+.button-and-page-num {
+    display: flex; /* Flexbox를 사용하여 내부 요소를 가로로 나열 */
+    justify-content: space-between;
+    align-items: center; /* 수직 가운데 정렬 */
+}
 
 </style>
 </head>
@@ -86,14 +102,14 @@
 <!-- / preloader -->
 
 <div id="page-header" class="question">
-        <div class="container">
+		<div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">
                     <h1 class="page-title fadeInDown animated first">Q&amp;A</h1>
                 </div><!-- / page-header -->
             </div><!-- / page-header-content -->
         </div><!-- / container -->
-    </div><!-- / page-header -->
+</div><!-- / page-header -->
 
 <!-- 사이드바 -->
    <div class="col-sm-4 col-md-3 sidebar-area">
@@ -112,24 +128,24 @@
    </div>
 <!-- 사이드바 -->
 
-            <!-- 한 번에 볼 게시글 수를 출력하는 태그 -->
-                <select id="pageSizeSelect"></select>
-                
-                <!-- 검색 창을 출력하는 태그 -->
-                <div id="searchDiv"></div>
-
-            <!-- 게시글 목록을 출력하는 태그 -->
-                <div id="infoListDiv"></div>
-
-		<!-- 질문 등록 버튼 -->
-	   <p>
-	    <a href="/funfun/community/qna_form">
-	        <button type="button" id="right-button" 
-	        class="noinBtn - btn btn-md btn-primary-filled btn-form-submit btn-rounded" >문의글 등록</button>
-	    </a>
-	   </p>
-                <!-- 페이지 번호를 출력하는 태그 -->
-                <div id="pageNumDiv"></div>
+		<!-- 한 번에 볼 게시글 수를 출력하는 태그 -->
+		    <select id="pageSizeSelect"></select>
+		    
+		<!-- 검색 창을 출력하는 태그 -->
+		    <div id="searchDiv"></div>
+		
+		<!-- 게시글 목록을 출력하는 태그 -->
+		    <div id="infoListDiv"></div>
+		
+			<!-- 질문 등록 버튼 -->
+		<div class="button-and-page-num">
+				<button type="button" id="right-button" 
+			    class="noinBtn - btn btn-md btn-primary-filled btn-form-submit btn-rounded"
+			    onclick="window.location.href='/funfun/community/qna_form';">문의글 등록</button>
+			
+			<!-- 페이지 번호를 출력하는 태그 -->
+			<div id="pageNumDiv"></div>
+		</div>
                 
    
 
@@ -217,7 +233,7 @@ function questionListDisplay(pageNum, pageSize, selectKeyword) {
             searchDiv.empty();
 
          searchDiv.append(
-             "<button id='searchButton' class='btn btn-md btn-primary-filled btn-form-submit btn-rounded' style='float:right; margin-right:150px;'>검색</button>"+
+             "<button id='searchButton' class='btn btn-md btn-primary-filled btn-form-submit btn-rounded' style='float:right; margin-right:150px; height:48px;'>검색</button>"+
             "<input type='text' class='form-control' id='selectKeyword' placeholder='검색어를 입력하세요' style='width:250px; height:4px; float:right; margin-right:10px;'>"
             )
           

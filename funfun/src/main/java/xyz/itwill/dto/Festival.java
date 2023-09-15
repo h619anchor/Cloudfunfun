@@ -31,6 +31,7 @@ public class Festival {
 	private int sponsor;
 	private long avgstar;
 	private double percentage;
+	private int deadline;
 	private MultipartFile mainMultipartFile;
 	private MultipartFile subMultipartFile;
 }

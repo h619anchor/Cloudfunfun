@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <body>
@@ -22,13 +24,18 @@
 						<form action="${pageContext.request.contextPath}/account/register" method="post">
 						<!-- 아이디 -->
 							<div class="form-group">
-							<input type="text" class="form-control" id="register-id"
-							name="id" placeholder="아이디"
-								title="소문자와 숫자를 포함하여 12자 이하로 입력해주세요." 
-								required data-error="*아이디는 소문자,숫자 포함 12자 이하로 입력해주세요.">
-							<div class="help-block with-errors"></div>
-						<!-- 아이디 중복체크 버튼 
-						<button type="button" id="check-id-button" class="btn btn-primary">아이디 중복체크</button>-->
+								<div class="input-group">
+								<input type="text" class="form-control" id="register-id"
+								name="id" placeholder="아이디"
+									title="소문자와 숫자를 포함하여 12자 이하로 입력해주세요." 
+									required data-error="*아이디는 소문자,숫자 포함 12자 이하로 입력해주세요."
+									style= "width : 320px">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<!-- 아이디 중복체크 버튼 -->
+								<button type="button" id="check-id-button" class="btn btn-primary">아이디 중복체크</button>
+									
+								</div>
+								<div class="help-block with-errors"></div>
 						</div>
 						<!-- 비밀번호 -->
 						<div class="form-group">
@@ -196,7 +203,7 @@
         function validateForm() {
             var idInput = document.getElementById('register-id');
             var idValue = idInput.value;
-            var idPattern = /^[a-z]+[a-z0-9]{3,12}$/g;
+            var idPattern = /^[a-z][a-z0-9]{3,12}$/;
             
             if (!idPattern.test(idValue)) {
                 alert('아이디는 소문자로 시작하며 소문자 또는 숫자 조합 3-12자 이내여야 합니다.');
@@ -313,6 +320,46 @@
 	            }
 	        }).open();
 	    });
+	</script>
+	
+	<script>
+		/*document.getElementById('check-id-button').addEventListener('click', function(){
+			var idInput = document.getElementById('register-id');
+			var idValue = idInput.value;})*/
+		
+		$(document).ready(function() {
+			$('#check-id-button').click(function(){
+				var idValue = $('#register-id').val();
+				var idInput = $('#register-id');
+				var idPattern = /^[a-z][a-z0-9]{3,12}$/;
+			
+				if(!idPattern.test(idValue)) {
+					alert("아이디를 올바른 값으로 입력해주세요.");
+					idInput.focus();
+					return;
+				}
+				
+			$.ajax({
+				type: 'GET',
+				url: "<c:url value='/checkId'/>",
+				data: {id: idValue},
+				success: function(response) {
+					if(idValue.trim()=='') {
+						alert('아이디를 입력해주세요.');
+					} else if (response.available) {
+						alert('사용 가능한 아이디입니다.');
+					} else {
+						alert('이미 사용중인 아이디입니다.');
+					}
+					isIdChecked = true;
+				},
+				error: function() {
+					alert('서버 오류가 발생하였습니다.');
+				}
+			});
+		});
+	});
+		
 	</script>
 	<!-- / javascript -->
 </body>
